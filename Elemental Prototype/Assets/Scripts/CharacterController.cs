@@ -34,6 +34,8 @@ public class CharacterController : MonoBehaviour
 
     public LayerMask groundMask;
 
+    public PlayerInput _playerInput;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +48,22 @@ public class CharacterController : MonoBehaviour
         AdjustGravity();
         CheckGround();
         UpdateAnimations();
+
+        if (_playerInput.actions["Move"].ReadValue<Vector2>().x > 0)
+        {
+            Move(1);
+            Debug.Log("run");
+        }
+        else if (_playerInput.actions["Move"].ReadValue<Vector2>().x < 0)
+        {
+            Move(-1);
+        }
+        else
+        {
+            Move(0);
+        }
+
+        
     }
 
     public void MoveInputHandler(InputAction.CallbackContext context)
@@ -56,7 +74,7 @@ public class CharacterController : MonoBehaviour
             JumpDown();
             Debug.Log("jump down");
         }
-        else if (context.ReadValue<Vector2>().x > 0)
+        /*else if (context.ReadValue<Vector2>().x > 0)
         {
             Move(1);
             Debug.Log("run");
@@ -68,7 +86,7 @@ public class CharacterController : MonoBehaviour
         else
         {
             Move(0);
-        }
+        }*/
 
         
     }
@@ -143,7 +161,7 @@ public class CharacterController : MonoBehaviour
 
     public void Move(int xMovement)
     {
-
+        Debug.Log("Move called");
         if (isDashing || isJumpingDown)
         {
             return;
