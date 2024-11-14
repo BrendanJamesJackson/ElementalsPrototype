@@ -1507,6 +1507,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 529308d7-8f28-4717-8d68-7fdda37989de
     m_ActionName: Player/Attack[/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 697853341}
+        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+        m_MethodName: BlockInputHandler
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5c1bc45d-1781-4670-b6a3-ea5d6ae4220d
+    m_ActionName: Player/Block[/XInputControllerWindows/rightShoulder]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1576,7 +1592,6 @@ MonoBehaviour:
   rollDashForce: 5
   groundCheckPos: {fileID: 1894596464}
   animator: {fileID: 697853343}
-  isJumpingDown: 0
   dashingPower: 20
   dashingTime: 0.6
   dashingCooldown: 0

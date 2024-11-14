@@ -18,17 +18,22 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private Transform groundCheckPos;
 
     [SerializeField] private Animator animator;
+
     private bool isWalking = false;
     private bool isJumping;
     private bool isFalling;
     private bool isFacingRight = true;
-    public bool isJumpingDown =false;
+    private bool isJumpingDown =false;
+
+    private bool isBlocking;
 
     private bool canDash = true;
     private bool isDashing;
     [SerializeField] private float dashingPower;
     [SerializeField] private float dashingTime;
     [SerializeField] private float dashingCooldown;
+
+    
 
     private bool isGrounded = false;
 
@@ -74,21 +79,6 @@ public class CharacterController : MonoBehaviour
             JumpDown();
             Debug.Log("jump down");
         }
-        /*else if (context.ReadValue<Vector2>().x > 0)
-        {
-            Move(1);
-            Debug.Log("run");
-        }
-        else if (context.ReadValue<Vector2>().x < 0)
-        {
-            Move(-1);
-        }
-        else
-        {
-            Move(0);
-        }*/
-
-        
     }
 
     public void JumpInputHandler(InputAction.CallbackContext context)
@@ -116,6 +106,19 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    public void BlockInputHandler(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Block(true);
+            animator.SetTrigger("block");
+        }
+        else if (context.canceled)
+        {
+            Block(false);
+        }
+    }
+
     public void UpdateAnimations()
     {
         if (rb.velocity.y < 0)
@@ -133,6 +136,7 @@ public class CharacterController : MonoBehaviour
         animator.SetBool("isJumping", isJumping);
         animator.SetBool("isFalling",isFalling);
         animator.SetBool("isGrounded",isGrounded);
+        animator.SetBool("isBlocking", isBlocking);
     }
 
     private void CheckGround()
@@ -227,6 +231,11 @@ public class CharacterController : MonoBehaviour
         animator.SetTrigger("attack");
     }
 
+    public void Block(bool state)
+    {
+        isBlocking = state;
+    }
+
     public void JumpDown()
     {
         if (isJumping || isFalling)
@@ -247,6 +256,11 @@ public class CharacterController : MonoBehaviour
         {
             rb.gravityScale = 1;
         }
+    }
+
+    public void TakeHit()
+    {
+        animator.SetTrigger("TakeHit");
     }
 
 }
