@@ -11,7 +11,9 @@ public class FireKnightCombatController : MonoBehaviour
 
     public float comboTimeAllowance;
     private float timeSincePrimary;
+    private float timeSinceSecondary;
     private bool PrimaryActivated = false;
+    private bool SecondaryActivated = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,20 +26,58 @@ public class FireKnightCombatController : MonoBehaviour
     void Update()
     {
         UpdateAnimations();
+
+        if (PrimaryActivated)
+        {
+            timeSincePrimary += Time.deltaTime;
+        }
+        if (timeSincePrimary > comboTimeAllowance)
+        {
+            PrimaryActivated = false;
+        }
+
+        if (SecondaryActivated)
+        {
+            timeSinceSecondary += Time.deltaTime;
+        }
+        if (timeSinceSecondary > comboTimeAllowance)
+        {
+            SecondaryActivated = false;
+        }
     }
 
     public void PrimaryAttackInputHandler(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            BasicAttack();
+            if (SecondaryActivated && timeSinceSecondary > 0.05f)
+            {
+                ThirdAttack();
+            }
+            else
+            {
+                BasicAttack();
+                timeSincePrimary = 0;
+                PrimaryActivated = true;
+            }
+
         }
     }
 
     public void SecondaryAttackInputHandler(InputAction.CallbackContext context)
     {
-
+        if (context.performed)
+        {
+            if (PrimaryActivated && timeSincePrimary > 0.05f)
+            {
+                SecondAttack();
+                timeSinceSecondary = 0;
+                SecondaryActivated = true;
+            }
+        }
     }
+
+    
 
     public void BlockInputHandler(InputAction.CallbackContext context)
     {
@@ -59,13 +99,20 @@ public class FireKnightCombatController : MonoBehaviour
 
     public void BasicAttack()
     {
-        animator.SetTrigger("attack");
-        //Debug.Log("attack");
+        animator.SetTrigger("basicAttack");
+        Debug.Log("Basic attack");
     }
 
     public void SecondAttack()
     {
+        animator.SetTrigger("secondAttack");
+        Debug.Log("Second Attack");
+    }
 
+    public void ThirdAttack()
+    {
+        animator.SetTrigger("thirdAttack");
+        Debug.Log("Third Attack");
     }
 
     public void Block(bool state)
