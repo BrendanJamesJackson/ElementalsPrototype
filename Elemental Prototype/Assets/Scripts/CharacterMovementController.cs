@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
-public class CharacterController : MonoBehaviour
+public class CharacterMovementController : MonoBehaviour
 {
 
     private Rigidbody2D rb;
@@ -14,6 +14,7 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private float downForce;
     [SerializeField] private float gravityAdjust;
     [SerializeField] private float rollDashForce;
+    [SerializeField] private int maxJump; 
 
     [SerializeField] private Transform groundCheckPos;
 
@@ -24,8 +25,8 @@ public class CharacterController : MonoBehaviour
     private bool isFalling;
     private bool isFacingRight = true;
     private bool isJumpingDown =false;
+    [SerializeField] private int jumpCount;
 
-    private bool isBlocking;
 
     private bool canDash = true;
     private bool isDashing;
@@ -83,9 +84,10 @@ public class CharacterController : MonoBehaviour
 
     public void JumpInputHandler(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && jumpCount > 0)
         {
             Debug.Log("jump");
+            jumpCount--;
             Jump();
         }
     }
@@ -98,45 +100,23 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    public void AttackInputHandler(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            Attack();
-        }
-    }
-
-    public void BlockInputHandler(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            Block(true);
-            animator.SetTrigger("block");
-        }
-        else if (context.canceled)
-        {
-            Block(false);
-        }
-    }
-
     public void UpdateAnimations()
     {
-        if (rb.velocity.y < 0)
+        if (rb.linearVelocity.y < 0)
         {
             isFalling = true;
             isJumping = false;
         }
-        else if (rb.velocity.y >= 0)
+        else if (rb.linearVelocity.y >= 0)
         {
             isFalling = false;
         }
 
         animator.SetBool("isWalking", isWalking);
-        animator.SetFloat("jumpDirection",rb.velocity.y);
+        animator.SetFloat("jumpDirection",rb.linearVelocity.y);
         animator.SetBool("isJumping", isJumping);
         animator.SetBool("isFalling",isFalling);
         animator.SetBool("isGrounded",isGrounded);
-        animator.SetBool("isBlocking", isBlocking);
     }
 
     private void CheckGround()
@@ -155,6 +135,10 @@ public class CharacterController : MonoBehaviour
             //Debug.Log("ground");
             isJumpingDown = false;
             //Debug.Log(isJumping);
+            if (!isJumping)
+            {
+                jumpCount = maxJump;
+            }
         }
         else
         {
@@ -171,7 +155,7 @@ public class CharacterController : MonoBehaviour
             return;
         }
 
-        rb.velocity = new Vector2(xMovement * speed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(xMovement * speed, rb.linearVelocity.y);
         
 
         if ((isFacingRight && xMovement < 0) || (!isFacingRight && xMovement > 0))
@@ -190,9 +174,9 @@ public class CharacterController : MonoBehaviour
         {
             isWalking = false;
         }
-        if (rb.velocity.y > 0 && rb.velocity.y < 2.5)
+        if (rb.linearVelocity.y > 0 && rb.linearVelocity.y < 2.5)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
 
         }
         
@@ -202,10 +186,10 @@ public class CharacterController : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
-        rb.velocity = new Vector2(transform.localScale.normalized.x * dashingPower,rb.velocity.y);
+        rb.linearVelocity = new Vector2(transform.localScale.normalized.x * dashingPower,rb.linearVelocity.y);
         animator.SetTrigger("rollDash");
         yield return new WaitForSeconds(dashingTime);
-        rb.velocity = new Vector2(0, rb.velocity.y); ;
+        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); ;
         isDashing = false;
         /*yield return new WaitForSeconds(dashingCooldown);*/
         canDash = true;
@@ -217,30 +201,20 @@ public class CharacterController : MonoBehaviour
         isJumpingDown = false;
         UpdateAnimations();
         //Debug.Log(isJumping);
-        if (rb.velocity.y < 0)
+        if (rb.linearVelocity.y < 0)
         {
-            rb.velocity = new Vector2(rb.velocity.x,0);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x,0);
         }
 
         rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         
     }
 
-    public void Attack()
-    {
-        animator.SetTrigger("attack");
-    }
-
-    public void Block(bool state)
-    {
-        isBlocking = state;
-    }
-
     public void JumpDown()
     {
         if (isJumping || isFalling)
         {
-            rb.velocity = new Vector2(0, 0);
+            rb.linearVelocity = new Vector2(0, 0);
             rb.AddForce(new Vector2(0, -downForce), ForceMode2D.Impulse);
             isJumpingDown = true;
         }
@@ -248,7 +222,7 @@ public class CharacterController : MonoBehaviour
 
     public void AdjustGravity()
     {
-        if (rb.velocity.y < 0)
+        if (rb.linearVelocity.y < 0)
         {
             rb.gravityScale = gravityAdjust;
         }
@@ -256,11 +230,6 @@ public class CharacterController : MonoBehaviour
         {
             rb.gravityScale = 1;
         }
-    }
-
-    public void TakeHit()
-    {
-        animator.SetTrigger("TakeHit");
     }
 
 }
