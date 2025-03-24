@@ -42,6 +42,18 @@ public class CharacterMovementController : MonoBehaviour
 
     public PlayerInput _playerInput;
 
+    private bool canMove = true;
+
+    public void SetCanMove(bool state)
+    {
+        canMove = state;
+    }
+
+    public bool GetCanMove()
+    {
+        return canMove;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,19 +67,23 @@ public class CharacterMovementController : MonoBehaviour
         CheckGround();
         UpdateAnimations();
 
-        if (_playerInput.actions["Move"].ReadValue<Vector2>().x > 0)
+        if (canMove)
         {
-            Move(1);
-            Debug.Log("run");
+            if (_playerInput.actions["Move"].ReadValue<Vector2>().x > 0)
+            {
+                Move(1);
+                Debug.Log("run");
+            }
+            else if (_playerInput.actions["Move"].ReadValue<Vector2>().x < 0)
+            {
+                Move(-1);
+            }
+            else
+            {
+                Move(0);
+            }
         }
-        else if (_playerInput.actions["Move"].ReadValue<Vector2>().x < 0)
-        {
-            Move(-1);
-        }
-        else
-        {
-            Move(0);
-        }
+        
 
         
     }
@@ -75,7 +91,7 @@ public class CharacterMovementController : MonoBehaviour
     public void MoveInputHandler(InputAction.CallbackContext context)
     {
         Debug.Log(context.ReadValue<Vector2>().x);
-        if (context.ReadValue<Vector2>().y < 0 && !isJumpingDown)
+        if (context.ReadValue<Vector2>().y < 0 && !isJumpingDown && canMove)
         {
             JumpDown();
             Debug.Log("jump down");
@@ -84,7 +100,7 @@ public class CharacterMovementController : MonoBehaviour
 
     public void JumpInputHandler(InputAction.CallbackContext context)
     {
-        if (context.performed && jumpCount > 0)
+        if (context.performed && jumpCount > 0 && canMove)
         {
             Debug.Log("jump");
             jumpCount--;
@@ -94,7 +110,7 @@ public class CharacterMovementController : MonoBehaviour
 
     public void DashRollInputHandler(InputAction.CallbackContext context)
     {
-        if (context.performed && canDash)
+        if (context.performed && canDash && canMove)
         {
             StartCoroutine(RollDash());
         }
@@ -102,21 +118,26 @@ public class CharacterMovementController : MonoBehaviour
 
     public void UpdateAnimations()
     {
-        if (rb.linearVelocity.y < 0)
-        {
-            isFalling = true;
-            isJumping = false;
-        }
-        else if (rb.linearVelocity.y >= 0)
-        {
-            isFalling = false;
+        if (canMove)
+        { 
+            if (rb.linearVelocity.y < 0)
+            {
+                isFalling = true;
+                isJumping = false;
+            }
+            else if (rb.linearVelocity.y >= 0)
+            {
+                isFalling = false;
+            }
+
+            animator.SetBool("isWalking", isWalking);
+            animator.SetFloat("jumpDirection",rb.linearVelocity.y);
+            animator.SetBool("isJumping", isJumping);
+            animator.SetBool("isFalling",isFalling);
+            animator.SetBool("isGrounded",isGrounded);
         }
 
-        animator.SetBool("isWalking", isWalking);
-        animator.SetFloat("jumpDirection",rb.linearVelocity.y);
-        animator.SetBool("isJumping", isJumping);
-        animator.SetBool("isFalling",isFalling);
-        animator.SetBool("isGrounded",isGrounded);
+        
     }
 
     private void CheckGround()

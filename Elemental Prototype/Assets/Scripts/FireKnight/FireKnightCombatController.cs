@@ -15,6 +15,7 @@ public class FireKnightCombatController : MonoBehaviour
     private bool PrimaryActivated = false;
     private bool SecondaryActivated = false;
 
+    public BoxCollider2D swordCollider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
