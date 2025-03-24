@@ -72,7 +72,7 @@ public class CharacterMovementController : MonoBehaviour
             if (_playerInput.actions["Move"].ReadValue<Vector2>().x > 0)
             {
                 Move(1);
-                Debug.Log("run");
+                //Debug.Log("run");
             }
             else if (_playerInput.actions["Move"].ReadValue<Vector2>().x < 0)
             {
@@ -90,11 +90,11 @@ public class CharacterMovementController : MonoBehaviour
 
     public void MoveInputHandler(InputAction.CallbackContext context)
     {
-        Debug.Log(context.ReadValue<Vector2>().x);
+        //Debug.Log(context.ReadValue<Vector2>().x);
         if (context.ReadValue<Vector2>().y < 0 && !isJumpingDown && canMove)
         {
             JumpDown();
-            Debug.Log("jump down");
+            //Debug.Log("jump down");
         }
     }
 
@@ -102,7 +102,7 @@ public class CharacterMovementController : MonoBehaviour
     {
         if (context.performed && jumpCount > 0 && canMove)
         {
-            Debug.Log("jump");
+            //Debug.Log("jump");
             jumpCount--;
             Jump();
         }
@@ -170,7 +170,7 @@ public class CharacterMovementController : MonoBehaviour
 
     public void Move(int xMovement)
     {
-        Debug.Log("Move called");
+        //Debug.Log("Move called");
         if (isDashing || isJumpingDown)
         {
             return;

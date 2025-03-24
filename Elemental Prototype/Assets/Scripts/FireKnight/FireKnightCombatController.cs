@@ -17,13 +17,18 @@ public class FireKnightCombatController : MonoBehaviour
 
     public BoxCollider2D swordCollider;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public bool BasicAttackReady = true;
+
+    public void SetBasicAttackReady(bool ready)
     {
-        
+        BasicAttackReady = ready;
     }
 
-    // Update is called once per frame
+    public bool GetBasicAttackReady()
+    {
+        return BasicAttackReady;
+    }
+
     void Update()
     {
         UpdateAnimations();
@@ -101,19 +106,20 @@ public class FireKnightCombatController : MonoBehaviour
     public void BasicAttack()
     {
         animator.SetTrigger("basicAttack");
-        Debug.Log("Basic attack");
+        BasicAttackReady = true;
+        //Debug.Log("Basic attack");
     }
 
     public void SecondAttack()
     {
         animator.SetTrigger("secondAttack");
-        Debug.Log("Second Attack");
+        //Debug.Log("Second Attack");
     }
 
     public void ThirdAttack()
     {
         animator.SetTrigger("thirdAttack");
-        Debug.Log("Third Attack");
+        //Debug.Log("Third Attack");
     }
 
     public void Block(bool state)
