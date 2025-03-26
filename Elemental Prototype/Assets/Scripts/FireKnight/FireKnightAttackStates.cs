@@ -11,6 +11,9 @@ public class FireKnightAttackStates : MonoBehaviour
             case "Light":
                 currentAttack = AttackType.Light;
                 break;
+            case "Medium":
+                currentAttack = AttackType.Medium;
+                break;
         }
     }
 

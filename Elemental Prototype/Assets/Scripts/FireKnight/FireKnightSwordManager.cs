@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FireKnightSwordManager : MonoBehaviour
@@ -10,6 +11,11 @@ public class FireKnightSwordManager : MonoBehaviour
     public float BasicMax;
     public float BasicHitback;
 
+    [Header("Medium Attack Values")]
+    public float MediumMin;
+    public float MediumMax;
+    public float MediumHitback;
+
     public Transform attackOriginPosition;
 
 
@@ -19,7 +25,7 @@ public class FireKnightSwordManager : MonoBehaviour
         while (current != null)
         {
             IPlayer p = current.GetComponent<IPlayer>();
-            if (p != null)
+            if (p != null && (current.GameObject() != this.transform.parent.gameObject))
             {
                 //collision.gameObject.GetComponent<PlayerManager>().HitBack(2f, transform.root);
                 switch (State.GetAttackState())
@@ -31,6 +37,14 @@ public class FireKnightSwordManager : MonoBehaviour
                                 BasicAttack(current.gameObject.GetComponent<PlayerManager>());
                             }
                             break; 
+                        }
+                    case AttackType.Medium:
+                        {
+                            if (CombatController.GetMediumAttackReady())
+                            {
+                                MediumAttack(current.gameObject.GetComponent<PlayerManager>());
+                            }
+                            break;
                         }
                 }
 
@@ -46,6 +60,14 @@ public class FireKnightSwordManager : MonoBehaviour
         enemy.HitBack(BasicHitback, attackOriginPosition);
         //Debug.Log("Basic Attack");
         CombatController.SetBasicAttackReady(false);
+    }
+
+    void MediumAttack(PlayerManager enemy)
+    {
+        enemy.TakeDamage(Random.Range(MediumMin, MediumMax));
+        enemy.HitBack(MediumHitback, attackOriginPosition);
+        Debug.Log("Medium Attack");
+        CombatController.SetMediumAttackReady(false);
     }
 }
 

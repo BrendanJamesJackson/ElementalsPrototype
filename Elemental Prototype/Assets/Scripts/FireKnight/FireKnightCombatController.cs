@@ -18,6 +18,7 @@ public class FireKnightCombatController : MonoBehaviour
     public BoxCollider2D swordCollider;
 
     public bool BasicAttackReady = true;
+    public bool MediumAttackReady = true;
 
     public void SetBasicAttackReady(bool ready)
     {
@@ -27,6 +28,16 @@ public class FireKnightCombatController : MonoBehaviour
     public bool GetBasicAttackReady()
     {
         return BasicAttackReady;
+    }
+
+    public void SetMediumAttackReady(bool ready)
+    {
+        MediumAttackReady = ready;
+    }
+
+    public bool GetMediumAttackReady()
+    {
+        return MediumAttackReady;
     }
 
     void Update()

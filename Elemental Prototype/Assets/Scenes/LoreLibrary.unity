@@ -929,6 +929,7 @@ GameObject:
   - component: {fileID: 975078866}
   - component: {fileID: 975078865}
   - component: {fileID: 975078864}
+  - component: {fileID: 975078868}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1019,6 +1020,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &975078868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975078863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: f042d5d009b98ee4f8fddf776be9ce3f, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: UI
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &985994866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,23 +1199,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Lorem ipsum (/\u02CCl\u0254\u02D0.r\u0259m \u02C8\u026Ap.s\u0259m/ LOR-\u0259m
-    IP-s\u0259m) is a dummy or placeholder text commonly used in graphic design,
-    publishing, and web development. Its purpose is to permit a page layout to be
-    designed, independently of the copy that will subsequently populate it, or to
-    demonstrate various fonts of a typeface without meaningful text that could be
-    distracting.\r\n\r\nLorem ipsum is typically a corrupted version of De finibus
-    bonorum et malorum, a 1st-century BC text by the Roman statesman and philosopher
-    Cicero, with words altered, added, and removed to make it nonsensical and improper
-    Latin. The first two words themselves are a truncation of dolorem ipsum (\"pain
-    itself\").\r\n\r\nVersions of the Lorem ipsum text have been used in typesetting
-    at least since the 1960s, when it was popularized by advertisements for Letraset
-    transfer sheets.[1] Lorem ipsum was introduced to the digital world in the mid-1980s,
-    when Aldus employed it in graphic and word-processing templates for its desktop
-    publishing program PageMaker. Other popular word processors, including Pages
-    and Microsoft Word, have since adopted Lorem ipsum,[2] as have many LaTeX packages,[3][4][5]
-    web content managers such as Joomla! and WordPress, and CSS libraries such as
-    Semantic UI."
+  m_text: "Founded by Ser Galeas\n\nThe first life was fire. The celestial explosions
+    of our burgeoning universe created the stars, the planets and all in between.
+    This divine flame was creator and destroyer, never content to dance a single
+    way for too long. Without the majesty of fire, we would not be.\n\r\nEven now
+    our world orbits a ball of flame that allows us to continue living. It is the
+    engine of creation, and the first step to godhood. To take a flame and bend it
+    to your will is tantamount to being a world shaper. You can forge weapons, cook
+    food, purify water, heat homes, destroy or give life. But this is merely child\u2019s
+    play. True divinity comes to those who earn it. It comes to those who are willing
+    to bind themselves to the flames, permanently. To channel it as naturally as
+    the liquid flames in our veins. \r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ce7625ba7c85cd418df9d742e605d0c, type: 2}
   m_sharedMaterial: {fileID: -5014947951017978672, guid: 4ce7625ba7c85cd418df9d742e605d0c, type: 2}
@@ -1398,10 +1423,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollRect: {fileID: 1073331131}
-  scrollSpeed: 0.4
+  scrollSpeed: 0.5
   startPos: {fileID: 1950712457}
   endPos: {fileID: 1158365789}
   bar: {fileID: 474330963}
+  _playerInput: {fileID: 975078868}
 --- !u!1 &1089432338
 GameObject:
   m_ObjectHideFlags: 0
@@ -2005,7 +2031,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fire Knight
+  m_text: The First Sparks
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a03463da8db5e52489ec6f9240415203, type: 2}
   m_sharedMaterial: {fileID: 2589213609557528503, guid: a03463da8db5e52489ec6f9240415203, type: 2}

@@ -1,7 +1,8 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class ScrollController : MonoBehaviour
+public class ScrollText : MonoBehaviour
 {
     public ScrollRect scrollRect;  // Assign this in Inspector
     public float scrollSpeed = 0.1f; // Tweak for faster/slower scroll
@@ -10,9 +11,11 @@ public class ScrollController : MonoBehaviour
     public RectTransform endPos;
     public RectTransform bar;
 
+    public PlayerInput _playerInput;
+
     void Update()
     {
-        float verticalInput = Input.GetAxis("Vertical"); // -1 to 1
+        float verticalInput = _playerInput.actions["Navigate"].ReadValue<Vector2>().y; // -1 to 1
 
         // Only scroll if there’s input
         if (Mathf.Abs(verticalInput) > 0.01f)
