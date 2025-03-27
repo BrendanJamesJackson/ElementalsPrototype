@@ -14,6 +14,7 @@ public class FireKnightCombatController : MonoBehaviour
     private float timeSinceSecondary;
     private bool PrimaryActivated = false;
     private bool SecondaryActivated = false;
+    public bool HoldAttackActivated = true;
 
     public BoxCollider2D swordCollider;
 
@@ -91,10 +92,38 @@ public class FireKnightCombatController : MonoBehaviour
                 timeSinceSecondary = 0;
                 SecondaryActivated = true;
             }
+            else
+            {
+                HoldAttackActivated = true;
+            }
         }
     }
 
+    public void HoldAttackInputHandler(InputAction.CallbackContext context)
+    {
+        if (context.started && HoldAttackActivated)
+        {
+            Debug.Log("hold start");
+            HoldAttackStart();
+            HoldAttackActivated = false;
+        }
+        else if (context.canceled)
+        {
+            HoldAttackReleased();
+        }
+    }   
     
+    public void HoldAttackStart()
+    {
+        animator.SetTrigger("specialAttackStart");
+        animator.SetBool("specialAttack", true);
+
+    }
+
+    public void HoldAttackReleased()
+    {
+            animator.SetBool("specialAttack", false);
+    }
 
     public void BlockInputHandler(InputAction.CallbackContext context)
     {
