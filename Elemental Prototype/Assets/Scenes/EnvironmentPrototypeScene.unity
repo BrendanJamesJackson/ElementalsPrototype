@@ -3280,6 +3280,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _playerInput: {fileID: 8836798587185092176}
+  canMove: 1
 --- !u!114 &5724507091743210174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3294,6 +3295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1040136701014148546}
   _playerInput: {fileID: 8836798587185092176}
+  _characterMovementController: {fileID: 5555446352815806714}
   comboTimeAllowance: 0.5
   HoldAttackActivated: 1
   swordCollider: {fileID: 0}

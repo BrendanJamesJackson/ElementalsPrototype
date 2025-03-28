@@ -47,7 +47,7 @@ public class FireKnightSwordManager : MonoBehaviour
                             break;
                         }
                 }
-
+                
                 break;
             }
             current = current.parent;

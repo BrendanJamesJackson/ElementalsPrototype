@@ -42,11 +42,24 @@ public class CharacterMovementController : MonoBehaviour
 
     public PlayerInput _playerInput;
 
-    private bool canMove = true;
+    public bool canMove = true;
 
     public void SetCanMove(bool state)
     {
         canMove = state;
+    }
+
+    public void SetCanMoveAnimFlag(int flag)
+    {
+        Debug.Log("Reset move anim event");
+        if (flag == 1)
+        {
+            canMove = true;
+        }
+        else if (flag == 0)
+        {
+            canMove = false;
+        }
     }
 
     public bool GetCanMove()
@@ -90,6 +103,10 @@ public class CharacterMovementController : MonoBehaviour
 
     public void MoveInputHandler(InputAction.CallbackContext context)
     {
+        if (!canMove)
+        {
+            Move(0);
+        }
         //Debug.Log(context.ReadValue<Vector2>().x);
         if (context.ReadValue<Vector2>().y < 0 && !isJumpingDown && canMove)
         {

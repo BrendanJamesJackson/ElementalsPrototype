@@ -7,6 +7,8 @@ public class FireKnightCombatController : MonoBehaviour
 
     public PlayerInput _playerInput;
 
+    public CharacterMovementController _characterMovementController;
+
     private bool isBlocking;
 
     public float comboTimeAllowance;
@@ -117,12 +119,13 @@ public class FireKnightCombatController : MonoBehaviour
     {
         animator.SetTrigger("specialAttackStart");
         animator.SetBool("specialAttack", true);
-
+        _characterMovementController.SetCanMove(false);
     }
 
     public void HoldAttackReleased()
     {
             animator.SetBool("specialAttack", false);
+        _characterMovementController.SetCanMove(true);
     }
 
     public void BlockInputHandler(InputAction.CallbackContext context)
@@ -131,10 +134,12 @@ public class FireKnightCombatController : MonoBehaviour
         {
             Block(true);
             animator.SetTrigger("block");
+            _characterMovementController.SetCanMove(false);
         }
         else if (context.canceled)
         {
             Block(false);
+            _characterMovementController.SetCanMove(true);
         }
     }
 
@@ -145,6 +150,7 @@ public class FireKnightCombatController : MonoBehaviour
 
     public void BasicAttack()
     {
+        _characterMovementController.SetCanMove(false);
         animator.SetTrigger("basicAttack");
         BasicAttackReady = true;
         //Debug.Log("Basic attack");
