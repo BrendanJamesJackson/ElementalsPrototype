@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
 public class PlayerManager : MonoBehaviour, IPlayer
 {
@@ -12,24 +13,16 @@ public class PlayerManager : MonoBehaviour, IPlayer
     [SerializeField] private float playerHealth = 100f;
 
 
+    public event Action<float>OnHealthChanged;
+
     public Animator anim;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Debug.Log(transform.position);
-    }
 
     public void TakeDamage(float damage)
     {
         playerHealth -= damage;
         //anim.SetTrigger("takeHit");
+
+        OnHealthChanged?.Invoke(playerHealth);
     }
 
     public void HitBack(float hitbackForce, Transform attackOriginPosition)
