@@ -5,18 +5,27 @@ using UnityEngine.InputSystem;
 
 public class SpawnPlayers : MonoBehaviour
 {
+    public GameManager GameManager;
+    public GameManagerUI GameUI;
+
     public PlayerInputManager InputManager;
     public CinemachineTargetGroup TargetGroup;
 
     public GameObject prefab1;
     public GameObject prefab2;
 
-    public Transform[] spawnPoints; 
+    public Transform[] spawnPoints;
+
+
+    private void Awake()
+    {
+        Spawn(prefab1 , prefab2);
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Spawn(prefab1 , prefab2);
+        
     }
 
     // Update is called once per frame
@@ -34,9 +43,9 @@ public class SpawnPlayers : MonoBehaviour
 
         PlayerInput player1 = PlayerInput.Instantiate(
             prefab: player1Prefab,
-            playerIndex: 0,
-            controlScheme: "Gamepad",
-            pairWithDevice: Gamepad.all[0]
+            playerIndex: 0
+            /*controlScheme: "Gamepad",
+            pairWithDevice: Gamepad.all[0]*/
         );
 
         PlayerInput player2 = PlayerInput.Instantiate(
@@ -51,6 +60,11 @@ public class SpawnPlayers : MonoBehaviour
 
         TargetGroup.AddMember(player1.transform.Find("CameraTargetAnchor"),1,2.8f);
         TargetGroup.AddMember(player2.transform.Find("CameraTargetAnchor"), 1, 2.8f);
+
+        GameManager.AddPlayers(player1.gameObject, player2.gameObject);
+        GameUI.AddPlayers(player1.gameObject, player2.gameObject);
+        GameManager.enabled = true;
+        GameUI.enabled = true;
     }
 
 
