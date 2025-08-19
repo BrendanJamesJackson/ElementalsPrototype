@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour, IPlayer
 
     [SerializeField] private float playerHealth = 100f;
 
+    public float hitBackMultiply;
 
     public event Action<float>OnHealthChanged;
 
@@ -20,7 +21,7 @@ public class PlayerManager : MonoBehaviour, IPlayer
     public void TakeDamage(float damage)
     {
         playerHealth -= damage;
-        //anim.SetTrigger("takeHit");
+        anim.SetTrigger("takeHit");
 
         OnHealthChanged?.Invoke(playerHealth);
     }
@@ -49,15 +50,19 @@ public class PlayerManager : MonoBehaviour, IPlayer
         Debug.Log(hitForce);
 
         hitForce *= hitbackForce;
-        rb.AddForce(hitForce, ForceMode2D.Impulse);
-        Debug.Log(hitForce);
+        hitForce.y = 0;
+        rb.AddForce(hitForce* hitBackMultiply, ForceMode2D.Impulse);
+        characterMovementController.SetHitBack(true);
+        Debug.Log(hitForce* hitBackMultiply + "HitForce");
 
         StartCoroutine(ResetCanMove());
     }
 
     IEnumerator ResetCanMove()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
+        characterMovementController.SetHitBack(false);
+
         //characterMovementController.SetCanMove(true);
         rb.linearVelocity = Vector2.zero;
     }

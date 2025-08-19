@@ -16,7 +16,8 @@ public class CharacterMovementController : MonoBehaviour
     [SerializeField] private float rollDashForce;
     [SerializeField] private int maxJump; 
 
-    [SerializeField] private Transform groundCheckPos;
+    [SerializeField] private Transform groundCheckPos1;
+    [SerializeField] private Transform groundCheckPos2;
 
     [SerializeField] private Animator animator;
 
@@ -25,6 +26,7 @@ public class CharacterMovementController : MonoBehaviour
     private bool isFalling;
     private bool isFacingRight = true;
     private bool isJumpingDown =false;
+    private bool isBeingHitBack = false;
     [SerializeField] private int jumpCount;
 
 
@@ -47,6 +49,11 @@ public class CharacterMovementController : MonoBehaviour
     public void SetCanMove(bool state)
     {
         canMove = state;
+    }
+
+    public void SetHitBack(bool state)
+    {
+        isBeingHitBack= state;
     }
 
     public void SetCanMoveAnimFlag(int flag)
@@ -159,13 +166,16 @@ public class CharacterMovementController : MonoBehaviour
 
     private void CheckGround()
     {
-        RaycastHit2D groundInfo = Physics2D.Raycast(groundCheckPos.position, Vector2.down, 1f,groundMask);
+        RaycastHit2D groundInfo1 = Physics2D.Raycast(groundCheckPos1.position, Vector2.down, 1f,groundMask);
+        RaycastHit2D groundInfo2 = Physics2D.Raycast(groundCheckPos2.position, Vector2.down, 1f, groundMask);
         //Debug.Log(groundInfo.collider.gameObject);
-        Debug.DrawRay(groundCheckPos.position, Vector2.down * 1, Color.yellow);
+        Debug.DrawRay(groundCheckPos1.position, Vector2.down * 1, Color.yellow);
+        Debug.DrawRay(groundCheckPos2.position, Vector2.down * 1, Color.yellow);
 
         //Debug.Log(groundInfo.collider.gameObject);
 
-        if (groundInfo.collider == true && groundInfo.collider.gameObject.tag == "Ground")
+        if ((groundInfo1.collider == true && groundInfo1.collider.gameObject.tag == "Ground")
+            || (groundInfo2.collider == true && groundInfo2.collider.gameObject.tag == "Ground"))
         {
             //isJumping = false;
             isFalling = false;
@@ -188,7 +198,7 @@ public class CharacterMovementController : MonoBehaviour
     public void Move(int xMovement)
     {
         //Debug.Log("Move called");
-        if (isDashing || isJumpingDown)
+        if (isDashing || isJumpingDown || isBeingHitBack)
         {
             return;
         }

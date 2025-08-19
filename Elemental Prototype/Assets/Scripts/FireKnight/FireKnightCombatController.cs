@@ -16,12 +16,72 @@ public class FireKnightCombatController : MonoBehaviour
     private float timeSinceSecondary;
     private bool PrimaryActivated = false;
     private bool SecondaryActivated = false;
-    public bool HoldAttackActivated = true;
+    public bool HoldAttackActivated = false;
 
     public BoxCollider2D swordCollider;
 
     public bool BasicAttackReady = true;
     public bool MediumAttackReady = true;
+
+    public AudioSource swordAudioController;
+    public AudioClip swordSwing1;
+    public AudioClip swordSwing2;
+    public AudioClip swordSwing3;
+    public AudioClip swordSwingAir;
+    public AudioClip swordCharge;
+    public AudioClip swordRelease;
+    public bool charging = false;
+
+    public void StopAudio()
+    {
+        swordAudioController.Stop();
+    }
+
+    public void PlayAudio(int attackNum)
+    {
+        Debug.Log("Playing Sound");
+        swordAudioController.Stop();
+
+        switch (attackNum)
+        {
+            case 1:
+                swordAudioController.resource = swordSwing1;
+                swordAudioController.pitch = Random.Range(0.9f, 1.2f);
+                break;
+            case 2:
+                swordAudioController.resource = swordSwing2;
+                swordAudioController.pitch = Random.Range(0.6f, 1.3f);
+                break;
+            case 3:
+                swordAudioController.resource = swordSwing3;
+                swordAudioController.pitch = Random.Range(0.6f, 1.1f);
+                break;
+            case 4:
+                swordAudioController.resource = swordSwingAir;
+                swordAudioController.pitch = Random.Range(0.7f, 1.3f);
+                break;
+            case 5:
+                if (charging)
+                {
+                    return;
+                }
+                else
+                {
+                    swordAudioController.resource = swordCharge;
+                    swordAudioController.loop = true;
+                    charging = true;
+                }
+                break;
+            case 6:
+                swordAudioController.loop = false;
+                swordAudioController.resource = swordRelease;
+                charging = false;
+                break;
+        }
+
+        swordAudioController.Play();
+        
+    }
 
     public void SetBasicAttackReady(bool ready)
     {
@@ -103,15 +163,16 @@ public class FireKnightCombatController : MonoBehaviour
 
     public void HoldAttackInputHandler(InputAction.CallbackContext context)
     {
-        if (context.started && HoldAttackActivated)
+        if (context.started && !HoldAttackActivated)
         {
             Debug.Log("hold start");
             HoldAttackStart();
-            HoldAttackActivated = false;
+            HoldAttackActivated = true;
         }
         else if (context.canceled)
         {
             HoldAttackReleased();
+            HoldAttackActivated = false;
         }
     }   
     
@@ -150,14 +211,18 @@ public class FireKnightCombatController : MonoBehaviour
 
     public void BasicAttack()
     {
+        BasicAttackReady = true;
+
         _characterMovementController.SetCanMove(false);
         animator.SetTrigger("basicAttack");
-        BasicAttackReady = true;
+        
+        
         //Debug.Log("Basic attack");
     }
 
     public void SecondAttack()
     {
+        MediumAttackReady = true;
         animator.SetTrigger("secondAttack");
         //Debug.Log("Second Attack");
     }

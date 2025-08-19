@@ -35,13 +35,13 @@ public class GameManagerUI : MonoBehaviour
     private void UpdateHealthP1(float health)
     {
         healthBarP1.fillAmount = (health / maxHealth);
-        healthParticlesP1.Play();
+        //healthParticlesP1.Play();
     }
 
     private void UpdateHealthP2(float health)
     {
         healthBarP2.fillAmount = (health / maxHealth);
-        healthParticlesP2.Play();
+        //healthParticlesP2.Play();
     }
 
     public void AddPlayers(GameObject p1, GameObject p2)
