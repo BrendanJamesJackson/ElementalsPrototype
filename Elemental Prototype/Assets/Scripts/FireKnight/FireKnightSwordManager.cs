@@ -27,6 +27,7 @@ public class FireKnightSwordManager : MonoBehaviour
             IPlayer p = current.GetComponent<IPlayer>();
             if (p != null && (current.GameObject() != this.transform.parent.gameObject))
             {
+                Debug.Log(collision.gameObject);
                 //collision.gameObject.GetComponent<PlayerManager>().HitBack(2f, transform.root);
                 switch (State.GetAttackState())
                 {
