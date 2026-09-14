@@ -305,10 +305,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GroundLeft
       objectReference: {fileID: 0}
-    - target: {fileID: 7867087273785178088, guid: e2d6d50ded783b442b7c187b65371a28, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8809358569841769536, guid: e2d6d50ded783b442b7c187b65371a28, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.835768
@@ -477,10 +473,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5573320333642289510, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5942912354407720760, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
       propertyPath: m_Name
       value: GroundCenter (6)
@@ -505,7 +497,6 @@ GameObject:
   - component: {fileID: 168759288}
   - component: {fileID: 168759287}
   - component: {fileID: 168759286}
-  - component: {fileID: 168759290}
   m_Layer: 0
   m_Name: WindHashashin
   m_TagString: Untagged
@@ -632,7 +623,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -727,75 +718,27 @@ MonoBehaviour:
     m_ActionId: 43a77a22-4294-49f4-a214-40612d90842c
     m_ActionName: 'Player/DashRoll[/Keyboard/enter]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 168759290}
-        m_TargetAssemblyTypeName: WindHashashinCombatController, Assembly-CSharp
-        m_MethodName: PrimaryAttackInputHandler
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 529308d7-8f28-4717-8d68-7fdda37989de
     m_ActionName: 'Player/PrimaryAttack[/Mouse/leftButton,/Keyboard/1]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 168759290}
-        m_TargetAssemblyTypeName: WindHashashinCombatController, Assembly-CSharp
-        m_MethodName: BlockInputHandler
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 5c1bc45d-1781-4670-b6a3-ea5d6ae4220d
     m_ActionName: 'Player/Block[/Mouse/rightButton]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 168759290}
-        m_TargetAssemblyTypeName: WindHashashinCombatController, Assembly-CSharp
-        m_MethodName: SecondaryAttackInputHandler
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: b82efe2b-7f50-45d7-af3f-0cf7c27d3a78
     m_ActionName: 'Player/SecondaryAttack[/Keyboard/2]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 168759290}
-        m_TargetAssemblyTypeName: WindHashashinCombatController, Assembly-CSharp
-        m_MethodName: HoldAttackInputHandler
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 994056ea-df34-4bd4-adf8-82a99a98d2a8
     m_ActionName: 'Player/HoldAttack[/Keyboard/shift]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: f094d50d-56da-408e-aba7-c184ec74a204
     m_ActionName: 'UI/Navigate[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Keyboard&Mouse
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -812,51 +755,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 12
-  jumpForce: 8
-  downForce: 25
+  jumpForce: 10
+  downForce: 11
   gravityAdjust: 3
+  rollDashForce: 6
   maxJump: 2
   groundCheckPos1: {fileID: 1939910749}
   groundCheckPos2: {fileID: 695735300}
   animator: {fileID: 168759285}
   jumpCount: 0
-  dashingPower: 50
-  dashingTime: 0.2
+  dashingPower: 22
+  dashingTime: 0.6
   dashingCooldown: 0
   groundMask:
     serializedVersion: 2
     m_Bits: 64
   _playerInput: {fileID: 168759288}
   canMove: 1
---- !u!114 &168759290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168759282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd30e2f7221c98a459ab7c02dc357478, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 168759285}
-  _playerInput: {fileID: 168759288}
-  _characterMovementController: {fileID: 168759289}
-  comboTimeAllowance: 0.5
-  SecondaryActivated: 0
-  HoldAttackActivated: 0
-  swordsCollider: {fileID: 0}
-  BasicAttackReady: 1
-  MediumAttackReady: 1
-  swordAudioController: {fileID: 0}
-  swordSwing1: {fileID: 0}
-  swordSwing2: {fileID: 0}
-  swordSwing3: {fileID: 0}
-  swordSwingAir: {fileID: 0}
-  swordCharge: {fileID: 0}
-  swordRelease: {fileID: 0}
-  charging: 0
 --- !u!4 &184389120 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3057549407951975326, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
@@ -1084,10 +999,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3057549407951975326, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5573320333642289510, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5942912354407720760, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
@@ -1401,10 +1312,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2125652679}
     m_Modifications:
-    - target: {fileID: 3289187757387296946, guid: 45327a777e2f6414b92c5bbef027f9e6, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7084071136367869668, guid: 45327a777e2f6414b92c5bbef027f9e6, type: 3}
       propertyPath: m_Name
       value: GroundRight
@@ -1797,7 +1704,7 @@ Transform:
   m_GameObject: {fileID: 442136958}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.618, y: 1.04, z: 0}
+  m_LocalPosition: {x: -12.289422, y: 1.310585, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2087,10 +1994,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5573320333642289510, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5942912354407720760, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
       propertyPath: m_Name
       value: GroundCenter
@@ -2360,7 +2263,7 @@ Transform:
   m_GameObject: {fileID: 602876374}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000000030688105, y: -9.519321e-10, z: 2.9212992e-18, w: 1}
-  m_LocalPosition: {x: -7.618, y: 1.04, z: -12.8}
+  m_LocalPosition: {x: -11.278, y: 1.252, z: -12.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2405,7 +2308,7 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 1
+  m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
@@ -2633,10 +2536,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5573320333642289510, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5942912354407720760, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
       propertyPath: m_Name
       value: GroundCenter (11)
@@ -2728,10 +2627,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3057549407951975326, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5573320333642289510, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5942912354407720760, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
@@ -2956,10 +2851,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5573320333642289510, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5942912354407720760, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
       propertyPath: m_Name
       value: GroundCenter (1)
@@ -3161,10 +3052,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3057549407951975326, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5573320333642289510, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5942912354407720760, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
@@ -3499,6 +3386,7 @@ GameObject:
   - component: {fileID: 1040311205}
   - component: {fileID: 1040311204}
   - component: {fileID: 1040311206}
+  - component: {fileID: 1040311207}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -3554,7 +3442,7 @@ Transform:
   m_GameObject: {fileID: 1040311203}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000000030688105, y: -9.519321e-10, z: -1.577794e-10, w: 1}
-  m_LocalPosition: {x: -7.618, y: 1.04, z: -12.8}
+  m_LocalPosition: {x: -11.278, y: 1.252, z: -12.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3577,6 +3465,19 @@ MonoBehaviour:
   m_Damping: 0.5
   m_MaxWindowSize: -1
   m_Padding: 0
+--- !u!114 &1040311207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040311203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683e89ebfcc222f40996f57bf2f0494c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pixelsPerUnit: 10
 --- !u!1 &1046628411
 GameObject:
   m_ObjectHideFlags: 0
@@ -3779,10 +3680,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3057549407951975326, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5573320333642289510, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5942912354407720760, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
@@ -4004,10 +3901,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5573320333642289510, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5942912354407720760, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
       propertyPath: m_Name
       value: GroundCenter (5)
@@ -4065,10 +3958,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5573320333642289510, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5942912354407720760, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
       propertyPath: m_Name
       value: GroundCenter (8)
@@ -4098,7 +3987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1134794503
 Transform:
   m_ObjectHideFlags: 0
@@ -4167,10 +4056,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3057549407951975326, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5573320333642289510, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5942912354407720760, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
@@ -4440,7 +4325,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1553286256858024930, guid: acb2c50dbabf6064fb1ad5b8c2681030, type: 3}
+  m_Sprite: {fileID: 21300000, guid: feab8dd152f5c424cb87fc8d1ca6460e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6480,10 +6365,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5573320333642289510, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5942912354407720760, guid: 7610fb8661bc5ca45a3434241bf970ea, type: 3}
       propertyPath: m_Name
       value: GroundCenter (7)
@@ -6502,10 +6383,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2125652679}
+  - component: {fileID: 2125652681}
   - component: {fileID: 2125652680}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Ground
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6539,8 +6421,8 @@ Transform:
   - {fileID: 81513756}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &2125652680
-BoxCollider2D:
+--- !u!66 &2125652680
+CompositeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6573,18 +6455,44 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 6.2964487, y: -19.663788}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 39.28061, y: 1.0462723}
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
   m_EdgeRadius: 0
+  m_ColliderPaths: []
+  m_CompositePaths:
+    m_Paths: []
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005
+  m_UseDelaunayMesh: 0
+  m_CompositeGameObject: {fileID: 2125652678}
+--- !u!50 &2125652681
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125652678}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!95 &1040136701014148546
 Animator:
   serializedVersion: 7
@@ -6689,7 +6597,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1715360836018753839
 Rigidbody2D:
   serializedVersion: 5
@@ -6713,7 +6621,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -6908,8 +6816,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 12
   jumpForce: 8
-  downForce: 20
+  downForce: 11
   gravityAdjust: 3
+  rollDashForce: 5
   maxJump: 2
   groundCheckPos1: {fileID: 6191931475355487652}
   groundCheckPos2: {fileID: 362332500}
@@ -7217,8 +7126,8 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 994056ea-df34-4bd4-adf8-82a99a98d2a8
     m_ActionName: 'Player/HoldAttack[/XInputControllerWindows/leftShoulder]'
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Keyboard&Mouse
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
