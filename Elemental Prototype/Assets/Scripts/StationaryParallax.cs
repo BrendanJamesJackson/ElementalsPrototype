@@ -19,9 +19,9 @@ public class StationaryParallax : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        for (int i = 0; i < _backgroundLayers.Length; i++)
+        /*for (int i = 0; i < _backgroundLayers.Length; i++)
         {
             _backgroundLayers[i].transform.position = 
                 new Vector3((_camera.transform.position.x * ((_backgroundLayers.Length - i)/7f) * horizAdjustmentFactor), _backgroundLayers[i].transform.position.y, 0);
@@ -31,6 +31,18 @@ public class StationaryParallax : MonoBehaviour
         {
             _backgroundLayers[i].transform.position =
                 new Vector3(_backgroundLayers[i].transform.position.x,(-(_camera.transform.position.y) * ((_backgroundLayers.Length - i) / 7f) * vertAdjustmentFactor),0);
+        }*/
+
+        for (int i = 0; i < _backgroundLayers.Length; i++)
+        {
+            float depthFactor = (_backgroundLayers.Length - i) / 7f;
+
+            float newX = _camera.transform.position.x * depthFactor * horizAdjustmentFactor;
+            float newY = -_camera.transform.position.y * depthFactor * vertAdjustmentFactor;
+
+            _backgroundLayers[i].transform.position = new Vector3(newX, newY, _backgroundLayers[i].transform.position.z);
+
+
         }
     }
 }

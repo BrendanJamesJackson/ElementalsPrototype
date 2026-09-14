@@ -13,7 +13,6 @@ public class CharacterMovementController : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float downForce;
     [SerializeField] private float gravityAdjust;
-    [SerializeField] private float rollDashForce;
     [SerializeField] private int maxJump; 
 
     [SerializeField] private Transform groundCheckPos1;
@@ -103,6 +102,10 @@ public class CharacterMovementController : MonoBehaviour
                 Move(0);
             }
         }
+        else if (!canMove)
+        {
+            Move(0);
+        }
         
 
         
@@ -144,7 +147,7 @@ public class CharacterMovementController : MonoBehaviour
     {
         if (canMove)
         { 
-            if (rb.linearVelocity.y < 0)
+            if (rb.linearVelocity.y < -0.1)
             {
                 isFalling = true;
                 isJumping = false;
